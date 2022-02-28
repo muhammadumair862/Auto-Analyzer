@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+
+	
+
+<div class="row">
+    <h3>Tasks Status</h3>
+    <div id="man" class="col s12">
+      <div class="card material-table">
+        <div class="table-header">
+          <span class="table-title">Status of Tasks</span>
+        </div>
+        <table id="datatable">
+          <thead>
+            <tr>
+              <th>ID</th>  
+              <th>Name</th>
+              <th>Product Link/Sku</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if data %}
+            {% for task in data %}
+            <tr>
+              <td>{{task.id}}</td>
+              <td>{{task.name}}</td>
+              <td>{{task.p_link}}</td>
+              <td id="status{{task.id}}">{{task.status}}</td>
+              <td>
+                {% if(task.status=="Running") %}
+                <a href="javascript:void(0)" id="audiobutton{{task.id}}" class="btn-floating btn-small waves-effect waves-light green" onclick="aud_play_pause(this.id)"><i id="icn{{task.id}}"  style="color: #ffffff;" class="material-icons">pause</i></a>
+                {% else %}
+                <a href="javascript:void(0)" id="audiobutton{{task.id}}" class="btn-floating btn-small waves-effect waves-light red" onclick="aud_play_pause(this.id)"><i id="icn{{task.id}}"  style="color: #ffffff;" class="material-icons">play_arrow</i></a>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+function aud_play_pause(id) {
+  
+  var myAudio = document.getElementById(id);
+  if (myAudio.text=="play_arrow") {
+    // myAudio.play();
+
+    $("#icn"+id.slice(11)).text("pause");
+    $('#'+id).addClass('green');
+    $('#'+id).removeClass('red');
+    $('#status'+id.slice(11)).text("Running");
+    $.ajax({
+            type : 'POST',
+            url : 'start/'+id.slice(11),
+            data : {'data':'start'}
+          });
+  } else {
+
+    $("#icn"+id.slice(11)).text("play_arrow");
+    $('#'+id).addClass('red');
+    $('#'+id).removeClass('green');
+    $('#status'+id.slice(11)).text("Stop");
+    $.ajax({
+            type : 'POST',
+            url : 'pause/'+id.slice(11),
+            data : {'data':'pause'}
+          });
+  }
+}
+</script>
+
+
+{% endblock %}

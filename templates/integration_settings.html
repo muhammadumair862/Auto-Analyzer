@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<br>
+<div class="container grey lighten-3 setting_style" >
+    <h3>Settings</h3>
+    <form action="/integration_settings" method="POST" class="col s12">
+      <div class="row">
+          <div class="input-field col s12">
+            <input id="Profit_margin" name="margin_fee" type="number" class="validate" placeholder="Profit Margin*" required>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="input-field col s12">
+            <input id="ship_fee" name="ship_fee" type="number" class="validate" placeholder="Shipping Fee*" required>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="ebay_fee" name="ebay_fee" type="number" class="validate" placeholder="Ebay Fee*" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" name="username" type="text" class="validate" placeholder="Username (Optional *required for Fieldfolio only)">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" name="password" type="password" class="validate" placeholder="Password (Optional *required for Fieldfolio only)*" >
+        </div>
+      </div>
+
+      
+ 
+      
+
+      <div class="row right-align">
+        <input type="submit" class="waves-effect waves-light green darken-1 btn" value="Save">
+      </div>
+
+
+    </form>
+
+
+</div>
+<br>
+
+{% endblock %}

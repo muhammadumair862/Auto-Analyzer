@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Auto Product Analyzer</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link  href= "{{ url_for('static',filename='css/materialize.css') }}"  type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link  href= "{{ url_for('static',filename='css/style.css') }}"  type="text/css" rel="stylesheet" media="screen,projection"/>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+  <!-- CSS For Table -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+
+
+</head>
+
+<body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/" class="brand-logo">Auto Product Analyzer</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/create">Create Task</a></li>
+        <li><a href="/tasks">Tasks</a></li>
+        <li><a href="/task_status">Status</a></li>
+        <li><a href="/product_data">Products Data</a></li>
+        <li><a href="/settings">Integration</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Create Task</a></li>
+        <li><a href="#">Tasks</a></li>
+        <li><a href="#">Status</a></li>
+        <li><a href="#">Show Data</a></li>
+        <li><a href="#">Integration</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  {% block body %}{% endblock %}
+
+  
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Auto Product Analyzer</h5>
+          <p class="grey-text text-lighten-4">Auto Product Analyzer is a tool that design to resolve the issues faces by the people that work on different ecommerce stores and want to sell their products on <b>Ebay</b> & <b>Amazon</b>. This System help them in Tasks Automation by automatic scrape product details, then monitor their prices & continously update product details.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Qucik Links</h5>
+          <ul>
+            <li><a class="white-text" href="/">Home</a></li>
+            <li><a class="white-text" href="/create">Create Task</a></li>
+            <li><a class="white-text" href="/tasks">Task</a></li>
+            <li><a class="white-text" href="/task_status">Status</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="/product_data">Produts Data</a></li>
+            <li><a class="white-text" href="/settings">Integration</a></li>
+            <!-- <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Auto Product Analyzer Team.</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>

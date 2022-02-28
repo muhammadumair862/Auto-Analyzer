@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="row" id="alert_box">
+        <div class="col s12 m12">
+          <div class="card green darken">
+            <div class="row">
+              <div class="col s12 m10">
+                <div class="card-content white-text">
+                  <p><i class="material-icons">check_circle</i> {{ message }}</p>
+              </div>
+            </div>
+            <div class="col s12 m2">
+              <i class="material-icons icon_style" id="alert_close" aria-hidden="true">close</i>
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<div class="container">
+    <h3>Integration</h3>
+    <ul>
+    <li><b>1.</b> Click on Edit button.</li>
+    <li><b>2.</b> Set your default Shipping Fee, Ebay Fee & Profit Margin</li>
+    <li><b>3.</b> Username & Password Optional (It only needed in case of Fieldfolio website)</li>
+    </ul>
+    <br>
+    <div class="row right-align">
+        <a href="/integration_settings" class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Edit</a>
+
+    </div>
+    
+    <table class="card">
+        <tr>
+            <td class="integration_table_th">Shipping Fee</td>
+            {% if data.ship_fee %} 
+            <td>{{data.ship_fee}}%</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="integration_table_th">Profit Margin</td>
+            {% if data.margin_fee %}
+            <td>{{data.margin_fee}}%</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="integration_table_th">Ebay Fee</td>
+            {% if data.ebay_fee %}
+            <td>{{data.ebay_fee}}%</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="integration_table_th">Username</td>
+            {% if data.username %}
+            <td>{{data.username}}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="integration_table_th">Password</td>
+            {% if(data.password) %}
+                <td>**********</td>
+            {% else %}
+                <td></td>
+            {% endif %}
+        </tr>
+
+    </table>
+
+
+    <br>
+
+</div>
+<script>
+  // Or with jQuery
+
+  $('#alert_close').click(function(){
+  $( "#alert_box" ).fadeOut( "slow", function() {
+  });
+});
+
+
+</script>
+{% endblock %}
+
+

@@ -1,0 +1,200 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="row" id="alert_box">
+        <div class="col s12 m12">
+          <div class="card green darken">
+            <div class="row">
+              <div class="col s12 m10">
+                <div class="card-content white-text">
+                  <p><i class="material-icons">check_circle</i> {{ message }}</p>
+              </div>
+            </div>
+            <div class="col s12 m2">
+              <i class="material-icons icon_style" id="alert_close" aria-hidden="true">close</i>
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+{% if msg == "delete" %}
+<div class="row" id="alert_box">
+  <div class="col s12 m12">
+    <div class="card green darken">
+      <div class="row">
+        <div class="col s12 m10">
+          <div class="card-content white-text">
+            <p><i class="material-icons">check_circle</i> Task {{id}} Delete Sucessfully!!!</p>
+        </div>
+      </div>
+      <div class="col s12 m2">
+        <i class="material-icons icon_style" id="alert_close" aria-hidden="true">close</i>
+      </div>
+    </div>
+   </div>
+  </div>
+</div>
+{% endif %}
+
+{% if msg == "not delete" %}
+<div class="row" id="alert_box">
+  <div class="col s12 m12">
+    <div class="card red darken">
+      <div class="row">
+        <div class="col s12 m10">
+          <div class="card-content white-text">
+            <p><i class="material-icons">highlight_off</i> Task {{id}} Cann't Delete !</p>
+        </div>
+      </div>
+      <div class="col s12 m2">
+        <i class="material-icons icon_style" id="alert_close" aria-hidden="true">close</i>
+      </div>
+    </div>
+   </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+
+
+
+<div class="row">
+    <h3>Tasks List</h3>
+    <div id="man" class="col s12">
+      <div class="card material-table">
+        <div class="table-header">
+          <span class="table-title">List of Tasks</span>
+          <div class="actions">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Names.." title="Search in Name">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Search for Websites.." title="Search in Website">
+            <a href="/create" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">person_add</i></a>
+          </div>
+        </div>
+        <table id="datatable">
+          <thead>
+            <tr>
+              <th>ID</th>  
+              <th>Name</th>
+              <th>Sku or Url</th>
+              <th>Website</th>
+              <th>Cateogry</th>
+              <th>Cateogry Url</th>
+              <th>Shipping Fee</th>
+              <th>Ebay Fee</th>
+              <th>Profit Margin</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if tasks_list %}
+            {% for task in tasks_list %}
+            <form action="/delete" method="POST">
+            <tr>
+              <td name="id">{{task[0]}}</td>
+              <td>{{task[1]}}</td>
+              <td>{{task[2]}}</td>
+              <td>{{task[4]}}</td>
+              <td>{{task[3]}}</td>
+              {% if task[5] %}
+              <td>{{task[5]}}</td>
+              {% else %}
+              <td></td>
+              {% endif %}
+
+              {% if task[7] %}
+              <td>{{task[7]}}</td>
+              {% else %}
+              <td>0</td>
+              {% endif %}
+
+              {% if task[8] %}
+              <td>{{task[8]}}</td>
+              {% else %}
+              <td>0</td>
+              {% endif %}
+
+              {% if task[6] %}
+              <td>{{task[6]}}</td> 
+              {% else %}
+              <td>0</td>
+              {% endif %}
+
+              <td><a href="/edit/{{task[0]}}/" class="waves-effect waves-light btn-small"><i class="material-icons" style="color: #ffffff;">edit</i></a>
+                <a href="/delete/{{task[0]}}/" class="waves-effect waves-light red lighten-1 btn-small"><i class="material-icons" style="color: #ffffff;">delete</i></a>
+              </td>
+            </tr>
+           </form>
+            {% endfor %}
+            {% endif %}
+  
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("datatable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+
+
+
+    function myFunction1() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput1");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("datatable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+
+
+    $('#alert_close').click(function(){
+    $( "#alert_box" ).fadeOut( "slow", function() {
+    });
+  });
+
+    </script>
+
+{% endblock %}

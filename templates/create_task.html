@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% if msg == True %}
+
+<div class="row" id="alert_box">
+  <div class="col s12 m12">
+    <div class="card green darken">
+      <div class="row">
+        <div class="col s12 m10">
+          <div class="card-content white-text">
+            <p><i class="material-icons">check_circle</i> Task Created Sucessfully!!!</p>
+        </div>
+      </div>
+      <div class="col s12 m2">
+        <i class="material-icons icon_style" id="alert_close" aria-hidden="true">close</i>
+      </div>
+    </div>
+   </div>
+  </div>
+</div>
+{% endif %}
+<br>
+<div class="container grey lighten-3 setting_style">
+    <h3>Create Task</h3>
+    <form action="/create_formula" method="POST" class="col s12">
+      <div class="row">
+          <div class="input-field col s12">
+            <input id="name" name="name" type="text" class="validate" placeholder="Task Name*" required>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="input-field col s12">
+            <input id="url" name="url" type="text" class="validate" placeholder="Product Url Or Sku*" required>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="input-field col l5 m5 s12">
+            <div class="row green-text">
+              
+              <select name="category" class="browser-default" required>
+                  <option value="" disabled selected>
+                    Select Cateogry*
+                  </option>
+                  
+                  <option value="Uploading & Updating">
+                    Uploading & Updating
+                  </option>
+                  
+                  <option value="Updating">
+                    Updating
+                  </option>
+              </select>
+            </div>
+          </div>
+          <div class="col l2 m2"></div>
+          <div class="input-field col l5 m5 s12">
+            <div class="row green-text">
+              
+              <select name="web" class="browser-default" required>
+                  <option value="" disabled selected>
+                    Select Website*
+                  </option>
+                  
+                  <option value="Fieldfolio">
+                    Fieldfolio
+                  </option>
+                  
+                  <option value="Healthpost">
+                    Healthpost
+                  </option>
+
+                  <option value="Iherb">
+                    Iherb
+                  </option>
+              </select>
+            </div>
+
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="cat_url" id="cat_url" type="text" class="validate" placeholder="Cateogry URL (Optional)">
+        </div>
+      </div>
+
+      
+ 
+      
+
+      <div class="row right-align">
+        <input type="submit" class="waves-effect waves-light green darken-1 btn" value="Next">
+      </div>
+
+
+    </form>
+
+</div>
+
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $('#alert_close').click(function(){
+    $( "#alert_box" ).fadeOut( "slow", function() {
+    });
+  });
+
+
+</script>
+
+
+{% endblock %}

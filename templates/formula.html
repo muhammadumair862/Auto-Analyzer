@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="row" id="alert_box">
+        <div class="col s12 m12">
+          <div class="card red darken">
+            <div class="row">
+              <div class="col s12 m10">
+                <div class="card-content white-text">
+                  <p><i class="material-icons">sim_card_alert</i> {{ message }}</p>
+              </div>
+            </div>
+            <div class="col s12 m2">
+              <i class="material-icons icon_style" id="alert_close" aria-hidden="true">close</i>
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<br>
+<div class="container grey lighten-3 setting_style">
+    <h3>Price Formula Parameters</h3>
+    
+    <form action="/task_created" method="POST" class="col s12">
+      <div>
+      <input class="col l1 m1 s1" style="border-bottom: none!important; box-shadow: none!important;" type="text" id="id" name="id" value="Task ID : {{id}}" readonly>
+     </div>
+ 
+     <div class="row">
+          <div class="input-field col s12">
+            <input id="ship_fee" name="ship_fee" type="number" class="validate" placeholder="Shipping Fee(%)*" required>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="input-field col s12">
+            <input id="ebay_fee" name="ebay_fee" type="number" class="validate" placeholder="Ebay Fee(%)*" required>
+          </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="margin_fee" name="margin_fee" type="number" class="validate" placeholder="Profit Margin(%)*" required>
+        </div>
+    </div>
+
+
+      <div class="row right-align">
+      <span>
+        <a href="/default_formula/{{id}}/create" name="Default" class="waves-effect waves-light green darken-1 btn">Use Default</a>
+      </span>
+      <span>
+        <input type="submit" name="finish" class="waves-effect waves-light green darken-1 btn" value="Finish">
+      </span>
+    </div>
+
+    </form>
+
+</div>
+<br>
+
+<script>
+
+$('#alert_close').click(function(){
+    $( "#alert_box" ).fadeOut( "slow", function() {
+    });
+  });
+
+</script>
+
+
+{% endblock %}
